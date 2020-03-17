@@ -2,6 +2,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Dependencies
   Sass
+  React-router-dom
 
 ## Available Scripts
 
