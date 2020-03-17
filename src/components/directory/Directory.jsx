@@ -48,7 +48,7 @@ class Directory extends Component {
     <div className="directory-menu">
       {this.state.sections.map(({title, imageUrl, id}) => (
         // destructuring the section before passing the keys to menu item
-        <MenuItem key={id} title={title} image={imageUrl}/>
+        <MenuItem key={id} title={title} imageUrl={imageUrl}/>
       ))}
     </div>
     )
