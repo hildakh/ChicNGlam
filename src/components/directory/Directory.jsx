@@ -30,7 +30,7 @@ class Directory extends Component {
           imageUrl: "https://i.ibb.co/GCCdy8t/womens.png",
           size: "large",
           id: 4,
-          linkUrl: "shop/womens"
+          linkUrl: "shop/womens",
         },
         {
           title: "mens",
@@ -46,9 +46,9 @@ class Directory extends Component {
   render() {
     return (
     <div className="directory-menu">
-      {this.state.sections.map(({title, imageUrl, id}) => (
+      {this.state.sections.map(({title, imageUrl, id, size}) => (
         // destructuring the section before passing the keys to menu item
-        <MenuItem key={id} title={title} imageUrl={imageUrl}/>
+        <MenuItem key={id} title={title} imageUrl={imageUrl} size={size}/>
       ))}
     </div>
     )
