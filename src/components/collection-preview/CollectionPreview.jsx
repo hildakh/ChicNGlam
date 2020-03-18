@@ -3,8 +3,9 @@ import './CollectionPreview.styles.scss';
 
 const CollectionPreview = () => {
   return(
-    <div>
-
+    <div className='collection-preview'>
+      <h1 className='title'>Title</h1>
+      <div className='preview'>Preview</div>
     </div>
   )
 }
