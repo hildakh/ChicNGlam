@@ -8,8 +8,8 @@ const FormInput = ({ handleChange, label, ...otherProps}) => (
   {
     //if we want to pass a label property, it will be created, otherwise no label will be assigned to the input field
     label ?
-    <label>
-    </label>
+    (<label className={`${otherProps.value.length ? 'shrink' : ''} form-input`}>
+    </label>)
     : null
   }
   </div>
