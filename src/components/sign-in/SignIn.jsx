@@ -33,7 +33,7 @@ class SignIn extends Component {
           <FormInput
           type="email"
           name='email'
-          onChange={this.state.handleChange}
+          onChange={this.handleChange}
           value={this.state.email}
           required
           />
@@ -42,7 +42,7 @@ class SignIn extends Component {
           <FormInput
           type='password'
           name='password'
-          onChange={this.state.handleChange}
+          onChange={this.handleChange}
           value={this.state.password}
           required
           />
