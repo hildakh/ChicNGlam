@@ -14,13 +14,13 @@ class SignIn extends Component {
   render() {
     return (
       <div className="signin">
-        <h2>I already have an account</h2>
+        <h3>I already have an account</h3>
         <span>Sign in with your email and password</span>
         <form>
-          <input type="email" name='email' value={this.state.email} required />
           <label>Email</label>
-          <input type='password' name='password' value={this.state.password} required />
+          <input type="email" name='email' value={this.state.email} required />
           <label>Password</label>
+          <input type='password' name='password' value={this.state.password} required />
 
           <input type='submit' value='Submit Form' />
         </form>
@@ -28,3 +28,5 @@ class SignIn extends Component {
     );
   }
 }
+
+export default SignIn;
