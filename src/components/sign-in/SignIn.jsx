@@ -29,7 +29,6 @@ class SignIn extends Component {
         <span>Sign in with your email and password</span>
         <form onSubmit={this.handleSubmit}>
 
-          <label>Email</label>
           <FormInput
           type="email"
           name='email'
@@ -39,7 +38,6 @@ class SignIn extends Component {
           required
           />
 
-          <label>Password</label>
           <FormInput
           type='password'
           name='password'
@@ -48,7 +46,6 @@ class SignIn extends Component {
           label='password'
           required
           />
-
 
           <input type='submit' value='Submit Form' />
         </form>
