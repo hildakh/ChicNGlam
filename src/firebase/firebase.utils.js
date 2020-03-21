@@ -19,3 +19,15 @@ firebase.initializeApp(config);
 // Got access to .auth() method by importing firebase/auth
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
+
+// bringing in a new instance of googleauthprovider class from google auth library
+// which takes a set of custom parameters
+const provider = new firebase.auth.GoogleAuthProvider();
+
+// always trigger google pop up whenever we use this google auth provider
+provider.setCustomParameters({ prompt: 'select_account'})
+
+// signInWithPopup takes the provider class the we just made but it takes it from different types of pop ups including twitter
+export const signInWithGoogle = () => auth.signInWithPopup(provider);
+
+export default firebase;
