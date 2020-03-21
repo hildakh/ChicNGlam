@@ -1,3 +1,10 @@
 .sign-in {
   width: 30vw;
+  display: flex;
+  flex-direction: column;
+
+  // uncomment this line later when there is the class title
+  // .title {
+  //   margin: 100px 0;
+  // }
 }
