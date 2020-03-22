@@ -17,6 +17,15 @@ class App extends Component {
     }
   }
 
+  componentDidMount() {
+    // onAuthStateChanged is a method that comes with firebase
+    auth.onAuthStateChanged(user => {
+      this.setState({ currentUser: user });
+
+      console.log(user);
+    })
+  }
+
   render() {
     return (
       <div>
