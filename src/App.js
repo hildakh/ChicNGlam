@@ -17,13 +17,18 @@ class App extends Component {
     }
   }
 
+  // closing subscription once the app unmounts
+  unsubscribeFromAuth = null;
+
   componentDidMount() {
     // onAuthStateChanged is a method that comes with firebase
-    auth.onAuthStateChanged(user => {
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(user => {
       this.setState({ currentUser: user });
-
-      console.log(user);
     })
+  }
+
+  componentWillUnmount() {
+    this.unsubscribeFromAuth();
   }
 
   render() {
