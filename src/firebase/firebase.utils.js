@@ -18,8 +18,11 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   // userAuth is null when the user hasn't signed in yet
   if(!userAuth) return;
 
-  //using a random ID to look at the result from firestore
-  console.log(firestore.doc('users/128dwsdhj'))
+  const userRef = firestore.doc('users/128dhsjh');
+
+  const snapShot = await userRef.get();
+
+  console.log(snapShot);
 }
 
 firebase.initializeApp(config);
