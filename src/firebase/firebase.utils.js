@@ -4,15 +4,41 @@ import 'firebase/firestore';
 import 'firebase/auth';
 
 const config = {
-  apiKey: "AIzaSyA7wgC-UK56Zf18JbOOesdUfk4RivaGLUo",
-  authDomain: "glam-shop-db.firebaseapp.com",
-  databaseURL: "https://glam-shop-db.firebaseio.com",
-  projectId: "glam-shop-db",
-  storageBucket: "glam-shop-db.appspot.com",
-  messagingSenderId: "392967992327",
-  appId: "1:392967992327:web:99ee7d64a0d771bd77e6a2",
-  measurementId: "G-MPDP68RX1E"
+  apiKey: "AIzaSyB4Uu7LcQeFikYHn3KD8tGYO9NUZFlfcIk",
+  authDomain: "my-glam-shop.firebaseapp.com",
+  databaseURL: "https://my-glam-shop.firebaseio.com",
+  projectId: "my-glam-shop",
+  storageBucket: "my-glam-shop.appspot.com",
+  messagingSenderId: "202382612290",
+  appId: "1:202382612290:web:9f10c9532b88c2c2025adb",
+  measurementId: "G-9MCE965PEE"
 };
+
+export const createUserProfileDocument = async (userAuth, additionalData) => {
+  // userAuth is null when the user hasn't signed in yet
+  if(!userAuth) return;
+
+  const userRef = firestore.doc(`users/${userAuth.uid}`);
+
+  const snapShot = await userRef.get();
+
+  if(!snapShot.exists) {
+    const { displayName, email } = userAuth;
+    const createdAt = new Date();
+
+    try {
+      await userRef.set({
+        displayName,
+        email,
+        createdAt,
+        ...additionalData
+      })
+    } catch (error) {
+      console.log('Error creating a user', error)
+    }
+  }
+  return userRef;
+}
 
 firebase.initializeApp(config);
 
