@@ -23,7 +23,6 @@ class App extends Component {
   componentDidMount() {
     // onAuthStateChanged is a method that comes with firebase
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async user => {
-      // this.setState({ currentUser: user });
       createUserProfileDocument(user);
       // console.log(user)
     })
