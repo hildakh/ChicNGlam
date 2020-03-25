@@ -18,14 +18,16 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   // userAuth is null when the user hasn't signed in yet
   if(!userAuth) return;
 
+  // getting the signed user uid to see if it already exists in the snapshot
   const userRef = firestore.doc(`users/${userAuth.uid}`);
-
   const snapShot = await userRef.get();
 
+  // getting displayname and email from userAuth object
   if(!snapShot.exists) {
     const { displayName, email } = userAuth;
     const createdAt = new Date();
 
+  // setting a new userRef for the signed in user
     try {
       await userRef.set({
         displayName,
