@@ -26,6 +26,7 @@ class App extends Component {
 
       if(userAuth) {
 
+        // Getting userRef for an existing user or one that has just been created by google sign in
         const userRef = await createUserProfileDocument(userAuth);
 
         userRef.onSnapshot(snapshot => {
