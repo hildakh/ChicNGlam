@@ -22,17 +22,30 @@ class SignUp extends Component {
 
     const { displayName, email, password, confirmPassword } = this.state;
 
-    if(password !== confirmPassword ) {
+    if (password !== confirmPassword) {
       alert("Passwords don't match");
       return;
     }
 
     try {
+      // creates a userAuth object with a given email and password
+      const { user } = await auth.createUserWithEmailAndPassword(
+        email,
+        password
+      );
 
+      // Adding the user to firestore docs
+      await createUserProfileDocument(user, { displayName });
+
+      this.setState({
+        displayName: "",
+        email: "",
+        password: "",
+        confirmPassword: ""
+      })
     } catch (error) {
-
+      console.log("Error creating the user", error);
     }
-
   };
 
   handleChange = event => {
@@ -76,7 +89,7 @@ class SignUp extends Component {
 
           <FormInput
             type="password"
-            name="confirmpassword"
+            name="confirmPassword"
             handleChange={this.handleChange}
             value={confirmPassword}
             label="Confirm Password"
