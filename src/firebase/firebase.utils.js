@@ -27,7 +27,7 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
     const { displayName, email } = userAuth;
     const createdAt = new Date();
 
-  // setting a new userRef for the signed in user
+  // setting a new userRef in firestore for the signed in user
     try {
       await userRef.set({
         displayName,
