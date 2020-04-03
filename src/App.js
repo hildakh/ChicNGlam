@@ -25,6 +25,7 @@ class App extends Component {
         // Getting userRef for an existing user or one that has just been created by google sign in
         const userRef = await createUserProfileDocument(userAuth);
 
+        //whenever the usersnapshot updates, we set the userReducer value with the new object
         userRef.onSnapshot(snapshot => {
           setCurrentUser({
               id: snapshot.id,
@@ -32,7 +33,7 @@ class App extends Component {
           })
           })
       }
-      setCurrentUser({ currentUser: userAuth });
+      setCurrentUser(userAuth);
     })
   }
 
@@ -45,11 +46,12 @@ class App extends Component {
       <div>
       <Header />
 
+        <Switch>
         <Route exact path="/" component={HomePage} />
         <Route exact path="/signup" component={SignInSignUp} />
-        <Switch></Switch>
         <Route exact path="/shop" component={ShopPage} />
         <Route exact path="/signin" component={SignInSignUp} />
+        </Switch>
       </div>
     );
   }
