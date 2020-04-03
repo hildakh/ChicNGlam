@@ -27,10 +27,8 @@ class App extends Component {
 
         userRef.onSnapshot(snapshot => {
           this.props.setCurrentUser({
-            currentUser: {
               id: snapshot.id,
               ...snapshot.data()
-            }
           })
           })
       }
