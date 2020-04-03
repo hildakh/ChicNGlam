@@ -12,11 +12,11 @@ import { setCurrentUser } from './redux/user/user.actions';
 
 class App extends Component {
 
-
   // closing subscription once the app unmounts
   unsubscribeFromAuth = null;
 
   componentDidMount() {
+    const { setCurrentUser } = this.props;
     // onAuthStateChanged is a method that comes with firebase
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
 
@@ -26,13 +26,13 @@ class App extends Component {
         const userRef = await createUserProfileDocument(userAuth);
 
         userRef.onSnapshot(snapshot => {
-          this.props.setCurrentUser({
+          setCurrentUser({
               id: snapshot.id,
               ...snapshot.data()
           })
           })
       }
-      this.setState({ currentUser: userAuth });
+      setCurrentUser({ currentUser: userAuth });
     })
   }
 
