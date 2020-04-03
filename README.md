@@ -4,6 +4,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
   Sass
   React-router-dom
   Firebase
+  Redux
+  Redux-logger
+  React-redux
 
 ## Available Scripts
 
