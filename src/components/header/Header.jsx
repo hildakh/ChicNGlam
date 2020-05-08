@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./Header.styles.scss";
-import Logo from "../../assets/original.svg";
 import { auth } from "../../firebase/firebase.utils";
 import { connect } from "react-redux";
 import CartIcon from "../cart-icon/CartIcon";
@@ -10,7 +9,6 @@ import CartDropdown from "../cart-dropdown/Cart-Dropdown";
 const Header = ({ currentUser, hidden }) => (
   <div className="header">
     <Link className="logo-container" to="/">
-      {/* <Logo className="logo" style={{}}/> */}
     </Link>
 
     <div className="options">
