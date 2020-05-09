@@ -1,10 +1,14 @@
 import React, { Component } from "react";
 import "./App.css";
+
+import Header from "./components/header/Header";
+
 import HomePage from "./pages/homepage/HomePage";
 import ShopPage from "./pages/shop/Shop";
 import { Switch, Route, Redirect } from "react-router-dom";
-import Header from "./components/header/Header";
 import SignInSignUp from "./pages/signin&signup/SignIn-SignUp";
+import CheckoutPage from './pages/checkout/CheckoutPage';
+
 // used to store the state of the user in the app
 import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
 import { connect } from "react-redux";
@@ -50,6 +54,7 @@ class App extends Component {
           <Route exact path="/signup" render={() => this.props.currentUser ? (<Redirect to='/'/>) : (<SignInSignUp />)} />
           <Route path="/shop" component={ShopPage} />
           <Route exact path="/signin" render={() => this.props.currentUser ? (<Redirect to='/'/>) : (<SignInSignUp />)} />
+          <Route exact path="/checkout" component={CheckoutPage} />
         </Switch>
       </div>
     );
