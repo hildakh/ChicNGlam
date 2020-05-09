@@ -9,6 +9,8 @@ import SignInSignUp from "./pages/signin&signup/SignIn-SignUp";
 import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
 import { connect } from "react-redux";
 import { setCurrentUser } from "./redux/user/user.actions";
+import { selectCurrentUser } from './redux/user/user.selectors';
+import { createStructuredSelector } from 'reselect';
 
 class App extends Component {
   // closing subscription once the app unmounts
@@ -55,9 +57,10 @@ class App extends Component {
 }
 
 //getting the userReducer off of state
-const mapStateToProps = ({ user }) => ({
-  currentUser: user.currentUser
+const mapStateToProps = createStructuredSelector ({
+  currentUser: selectCurrentUser
 });
+
 const mapDispatchToProps = dispatch => ({
   setCurrentUser: user => dispatch(setCurrentUser(user))
 });
