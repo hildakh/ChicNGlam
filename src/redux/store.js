@@ -14,4 +14,4 @@ const store = createStore(rootReducer, applyMiddleware(...middlewares));
 // persistor is a persisted version of the store and using it on the store would create a provider that wraps the application
 const persistor = persistStore(store);
 
-export default { store, persistor };
+export { store, persistor };
