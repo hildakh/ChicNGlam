@@ -8,6 +8,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
   Redux-logger
   React-redux
   Reselect
+  Redux-persist
 
 ## Available Scripts
 
