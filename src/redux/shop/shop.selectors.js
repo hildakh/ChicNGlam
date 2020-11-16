@@ -8,6 +8,12 @@ export const selectCollections = createSelector(
   (shop) => shop.collections
 );
 
+export const selectCollectionsForOverview = createSelector(
+  // we need a collections array for the collections preview page
+  [selectCollections],
+  // converting collections object into an array and accessing each collection object inside that array
+  collections => Object.keys(collections).map(key => collections[key]  )
+)
 // By wrapping this function is memoize, we're saying that whenever this function gets called 
 // and receives collectionUrlParam, I want to memoize the return of this function 
 // (in this case we return a selector).If this function gets called again with the same 
