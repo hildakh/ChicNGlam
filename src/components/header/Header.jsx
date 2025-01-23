@@ -8,11 +8,6 @@ import CartIcon from "../cart-icon/CartIcon";
 import CartDropdown from "../cart-dropdown/Cart-Dropdown";
 import { selectCartHidden } from '../../redux/cart/cart.selectors';
 import { selectCurrentUser } from '../../redux/user/user.selectors';
-
-
-
-
-
 import "./Header.styles.scss";
 
 const Header = ({ currentUser, hidden }) => (

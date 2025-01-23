@@ -9,7 +9,6 @@ const HomePage = () => (
     <div>
       <div className='preview'>
       <Link to="/shop">Preview Collections</Link>
-
       </div>
     </div>
   </div>
