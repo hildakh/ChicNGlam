@@ -5,7 +5,7 @@ import Header from "./components/header/Header";
 
 import HomePage from "./routes/homepage/HomePage";
 import ShopPage from "./routes/shop/Shop";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import SignInSignUp from "./routes/signin&signup/SignIn-SignUp";
 import CheckoutPage from './routes/checkout/CheckoutPage';
 
@@ -22,6 +22,7 @@ class App extends Component {
 
   componentDidMount() {
     const { setCurrentUser } = this.props;
+
     // onAuthStateChanged is a method that comes with firebase
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
       if (userAuth) {
@@ -51,9 +52,9 @@ class App extends Component {
 
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/signup" element={() => this.props.currentUser ? (<Navigate to='/'/>) : (<SignInSignUp />)} />
+          <Route path="/signup" element={this.props.currentUser ? (<HomePage />) : (<SignInSignUp />)} />
           <Route path="/shop/*" element={<ShopPage />} />
-          <Route path="/signin" element={() => this.props.currentUser ? (<Navigate to='/'/>) : (<SignInSignUp />)} />
+          <Route path="/signin" element={this.props.currentUser ? (<HomePage />) : (<SignInSignUp />)} />
           <Route path="/checkout" element={<CheckoutPage />} />
         </Routes>
       </div>
