@@ -1,7 +1,6 @@
 import React from "react";
 import "./Menu-Item.styles.scss";
-import { withRouter } from "react-router-dom";
-// withRouter is a higher order component that takes a component as an argument and returns a modified component
+import { withRouter } from "../../helpers/with-router";
 
 const MenuItem = ({ title, id, imageUrl, size, history, linkUrl, match }) => (
   <div
