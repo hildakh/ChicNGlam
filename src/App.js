@@ -3,11 +3,11 @@ import "./App.css";
 
 import Header from "./components/header/Header";
 
-import HomePage from "./pages/homepage/HomePage";
-import ShopPage from "./pages/shop/Shop";
+import HomePage from "./routes/homepage/HomePage";
+import ShopPage from "./routes/shop/Shop";
 import { Routes, Route, Navigate } from "react-router-dom";
-import SignInSignUp from "./pages/signin&signup/SignIn-SignUp";
-import CheckoutPage from './pages/checkout/CheckoutPage';
+import SignInSignUp from "./routes/signin&signup/SignIn-SignUp";
+import CheckoutPage from './routes/checkout/CheckoutPage';
 
 // used to store the state of the user in the app
 import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
