@@ -5,7 +5,7 @@ import Header from "./components/header/Header";
 
 import HomePage from "./pages/homepage/HomePage";
 import ShopPage from "./pages/shop/Shop";
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import SignInSignUp from "./pages/signin&signup/SignIn-SignUp";
 import CheckoutPage from './pages/checkout/CheckoutPage';
 
@@ -49,13 +49,13 @@ class App extends Component {
       <div>
         <Header />
 
-        <Switch>
-          <Route exact path="/" component={HomePage} />
-          <Route exact path="/signup" render={() => this.props.currentUser ? (<Redirect to='/'/>) : (<SignInSignUp />)} />
-          <Route path="/shop" component={ShopPage} />
-          <Route exact path="/signin" render={() => this.props.currentUser ? (<Redirect to='/'/>) : (<SignInSignUp />)} />
-          <Route exact path="/checkout" component={CheckoutPage} />
-        </Switch>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/signup" element={() => this.props.currentUser ? (<Navigate to='/'/>) : (<SignInSignUp />)} />
+          <Route path="/shop/*" element={<ShopPage />} />
+          <Route path="/signin" element={() => this.props.currentUser ? (<Navigate to='/'/>) : (<SignInSignUp />)} />
+          <Route path="/checkout" element={<CheckoutPage />} />
+        </Routes>
       </div>
     );
   }
