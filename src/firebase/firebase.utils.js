@@ -1,7 +1,15 @@
-// importing firebase utility library
-import firebase from 'firebase/app';
-import 'firebase/firestore';
-import 'firebase/auth';
+import { initializeApp } from 'firebase/app';
+import {
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup
+} from 'firebase/auth';
+import {
+  getFirestore,
+  doc,
+  getDoc,
+  setDoc
+} from 'firebase/firestore';
 
 const config = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -14,48 +22,34 @@ const config = {
   measurementId: process.env.REACT_APP_MEASUREMENT_ID
 };
 
+const app = initializeApp(config);
+export const auth = getAuth(app);
+export const firestore = getFirestore(app);
+
 export const createUserProfileDocument = async (userAuth, additionalData) => {
-  // userAuth is null when the user hasn't signed in yet
-  if(!userAuth) return;
+  if (!userAuth) return;
 
-  // getting the signed user uid to see if it already exists in the snapshot
-  const userRef = firestore.doc(`users/${userAuth.uid}`);
-  const snapShot = await userRef.get();
+  const userRef = doc(firestore, `users/${userAuth.uid}`);
+  const snapShot = await getDoc(userRef);
 
-  // getting displayname and email from userAuth object
-  if(!snapShot.exists) {
+  if (!snapShot.exists()) {
     const { displayName, email } = userAuth;
     const createdAt = new Date();
 
-  // setting a new userRef in firestore for the signed in user
     try {
-      await userRef.set({
+      await setDoc(userRef, {
         displayName,
         email,
         createdAt,
         ...additionalData
-      })
+      });
     } catch (error) {
-      console.log('Error creating a user', error)
+      console.log('Error creating user', error);
     }
   }
   return userRef;
-}
+};
 
-firebase.initializeApp(config);
-
-// Got access to .auth() method by importing firebase/auth
-export const auth = firebase.auth();
-export const firestore = firebase.firestore();
-
-// bringing in a new instance of googleauthprovider class from google auth library
-// which takes a set of custom parameters
-const provider = new firebase.auth.GoogleAuthProvider();
-
-// always trigger google pop up whenever we use this google auth provider
-provider.setCustomParameters({ prompt: 'select_account'})
-
-// signInWithPopup takes the provider class the we just made but it takes it from different types of pop ups including twitter
-export const signInWithGoogle = () => auth.signInWithPopup(provider);
-
-export default firebase;
+const provider = new GoogleAuthProvider();
+provider.setCustomParameters({ prompt: 'select_account' });
+export const signInWithGoogle = () => signInWithPopup(auth, provider);
