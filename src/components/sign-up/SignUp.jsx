@@ -1,34 +1,38 @@
 import React, { useState } from "react";
-import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth, createUserProfileDocument } from "../../utils/firebase/firebase.utils";
+import {
+  createUserProfileDocument,
+  createAuthUserWithEmailAndPassword,
+} from "../../utils/firebase/firebase.utils";
 import FormInput from "../form-input/FormInput";
 import CustomButton from "../custom-button/CustomButton";
-
-
 import "./SignUp.styles.scss";
 
+const defaultFormFields = {
+  displayName: "",
+  email: "",
+  password: "",
+  confirmPassword: ""
+};
+
 const SignUp = () => {
-  const [state, setState] = useState({
-    displayName: "",
-    email: "",
-    password: "",
-    confirmPassword: ""
-  });
+  const [formFields, setFormFields] = useState(defaultFormFields);
+  const { displayName, email, password, confirmPassword } = formFields;
+
+  const resetFormFields = () => {
+    setFormFields(defaultFormFields);
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const { displayName, email, password, confirmPassword } = state;
-
-    if (state.password !== confirmPassword) {
+    if (password !== confirmPassword) {
       alert("Passwords don't match");
       return;
     }
 
     try {
       // creates a userAuth object with a given email and password
-      const { user } = await createUserWithEmailAndPassword(
-        auth,
+      const { user } = await createAuthUserWithEmailAndPassword(
         email,
         password
       );
@@ -36,20 +40,19 @@ const SignUp = () => {
       // Adding the user to firestore docs
       await createUserProfileDocument(user, { displayName });
 
-      setState({
-        displayName: "",
-        email: "",
-        password: "",
-        confirmPassword: ""
-      })
+      resetFormFields();
     } catch (error) {
-      console.log("Error creating the user", error);
+      if (error.code === "auth/email-already-in-use") {
+        alert("Cannot create user. Email already in use");
+      } else {
+        console.log("Error creating the user", error);
+      }
     }
   };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setState(prevState => ({
+    setFormFields(prevState => ({
       ...prevState,
       [name]: value,
     }));
@@ -64,7 +67,7 @@ const SignUp = () => {
           type="text"
           name="displayName"
           handleChange={handleChange}
-          value={state.displayName}
+          value={formFields.displayName}
           label="Display Name"
           required
         />
@@ -73,7 +76,7 @@ const SignUp = () => {
           type="email"
           name="email"
           handleChange={handleChange}
-          value={state.email}
+          value={formFields.email}
           label="Email"
           required
         />
@@ -82,7 +85,7 @@ const SignUp = () => {
           type="password"
           name="password"
           handleChange={handleChange}
-          value={state.password}
+          value={formFields.password}
           label="Password"
           required
         />
@@ -91,7 +94,7 @@ const SignUp = () => {
           type="password"
           name="confirmPassword"
           handleChange={handleChange}
-          value={state.confirmPassword}
+          value={formFields.confirmPassword}
           label="Confirm Password"
           required
         />

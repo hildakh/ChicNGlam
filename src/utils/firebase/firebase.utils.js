@@ -1,14 +1,15 @@
 import { initializeApp } from 'firebase/app';
 import {
+  createUserWithEmailAndPassword,
   getAuth,
   GoogleAuthProvider,
-  signInWithPopup
+  signInWithPopup,
 } from 'firebase/auth';
 import {
   getFirestore,
   doc,
   getDoc,
-  setDoc
+  setDoc,
 } from 'firebase/firestore';
 
 const config = {
@@ -47,9 +48,17 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
       console.log('Error creating user', error);
     }
   }
+
   return userRef;
 };
 
-const provider = new GoogleAuthProvider();
-provider.setCustomParameters({ prompt: 'select_account' });
-export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
+const gooleProvider = new GoogleAuthProvider();
+gooleProvider.setCustomParameters({ prompt: 'select_account' });
+
+export const signInWithGooglePopup = () => signInWithPopup(auth, gooleProvider);
+
+export const createAuthUserWithEmailAndPassword = async (email, password) => {
+  if (!email || !password) return;
+
+  return await createUserWithEmailAndPassword(auth, email, password);
+}
