@@ -3,17 +3,20 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin-bottom: 20px;
   margin: 0 auto;
 
   .logo-container {
-    height: 100%;
-    width: 70px;
-    padding: 25px;
-    background-image: url("../../assets/original.svg");
-    background-size: contain;
-    background-position: cover;
-    background-repeat: no-repeat
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &__logo {
+      width: 90px;
+      height: 90px;
+      object-fit: contain;
+    }
   }
 
   .options {

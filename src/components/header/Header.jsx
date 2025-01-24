@@ -6,6 +6,7 @@ import { createStructuredSelector } from 'reselect';
 import { auth } from "../../utils/firebase/firebase.utils";
 import CartIcon from "../cart-icon/CartIcon";
 import CartDropdown from "../cart-dropdown/Cart-Dropdown";
+import logo from '../../assets/chic-n-glam-logo.svg';
 import { selectCartHidden } from '../../redux/cart/cart.selectors';
 import { selectCurrentUser } from '../../redux/user/user.selectors';
 import "./Header.styles.scss";
@@ -13,6 +14,11 @@ import "./Header.styles.scss";
 const Header = ({ currentUser, hidden }) => (
   <div className="header">
     <Link className="logo-container" to="/">
+      <img
+        src={logo}
+        alt="Chic N Glam Logo"
+        className="logo-container__logo"
+      />
     </Link>
 
     <div className="options">
