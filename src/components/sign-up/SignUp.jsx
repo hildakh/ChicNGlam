@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth, createUserProfileDocument } from "../../utils/firebase/firebase.utils";
 import FormInput from "../form-input/FormInput";
 import CustomButton from "../custom-button/CustomButton";
@@ -26,7 +27,8 @@ const SignUp = () => {
 
     try {
       // creates a userAuth object with a given email and password
-      const { user } = await auth.createUserWithEmailAndPassword(
+      const { user } = await createUserWithEmailAndPassword(
+        auth,
         email,
         password
       );
@@ -47,7 +49,10 @@ const SignUp = () => {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setState({ [name]: value });
+    setState(prevState => ({
+      ...prevState,
+      [name]: value,
+    }));
   };
 
   return (

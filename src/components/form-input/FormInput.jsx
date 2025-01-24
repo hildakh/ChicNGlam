@@ -2,9 +2,9 @@ import React from 'react';
 
 import './FormInput.styles.scss';
 
-const FormInput = ({ handleChange, label, ...otherProps}) => (
+const FormInput = ({ handleChange, label, value, ...otherProps}) => (
   <div className='group'>
-    <input className='form-input' onChange={handleChange} {...otherProps} />
+    <input className='form-input' onChange={handleChange} value={value || ''} {...otherProps} />
   {
     //if we want to pass a label property, it will be created, otherwise no label will be assigned to the input field
     label ?
