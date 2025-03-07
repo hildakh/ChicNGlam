@@ -29,3 +29,7 @@ export const clearItemFromCart = (cartItems, itemToclear) => {
   const remainingItems = cartItems.filter(item => item.id !== itemToclear.id);
   return remainingItems;
 }
+
+export const clearCart = () => {
+  return [];
+}

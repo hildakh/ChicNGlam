@@ -2,12 +2,14 @@ import React from "react";
 
 import StripeCheckout from "react-stripe-checkout";
 
-const StripeButton = ({ price }) => {
+const StripeButton = ({ price, onPaymentSuccess }) => {
   const priceForStripe = price * 100;
   const publishableKey = "pk_test_KhDWF72ASDt9sV3lhLraQPOT00RuwUmA4u";
-  const onToken = (token) => {
-    alert("Payment Successful!");
+
+  const onToken = () => {
+    onPaymentSuccess();
   };
+
   return (
     <StripeCheckout
       label="Pay Now"
