@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 
@@ -16,12 +16,23 @@ const CheckoutPage = ({
   total,
   dispatch
 }) => {
+  const [showSuccess, setShowSuccess] = useState(false);
+
   const handlePaymentSuccess = () => {
+    setShowSuccess(true);
+    setTimeout(() => setShowSuccess(false), 1500);
     dispatch(clearCart());
   };
 
   return (
     <div className="checkout-page">
+      {
+        showSuccess && (
+          <div className="success-message">
+            Payment Successful! Thank you for your purchase.
+          </div>
+        )
+      }
       <div className="checkout-header">
         <div className="header-block">
           <span>product</span>
@@ -51,7 +62,10 @@ const CheckoutPage = ({
       </div>
       {
         cartItems?.length > 0 && (
-          <StripeButton price={total} onPaymentSuccess={handlePaymentSuccess}/>
+          <StripeButton
+            price={total}
+            onPaymentSuccess={handlePaymentSuccess}
+          />
         )
       }
     </div>
