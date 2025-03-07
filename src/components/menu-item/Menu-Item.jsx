@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import "./Menu-Item.styles.scss";
 import { withRouter } from "../../helpers/with-router";
 
-const MenuItem = ({ title, imageUrl, size, linkUrl, match }) => {
+const MenuItem = ({ title, imageUrl, size, linkUrl }) => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
