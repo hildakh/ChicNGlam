@@ -8,8 +8,11 @@ import { withRouter } from "../../helpers/with-router";
 import CustomButton from "../custom-button/CustomButton";
 
 import "./Cart-Dropdown.styles.scss";
+import { useNavigate } from "react-router-dom";
 
-const CartDropdown = ({ cartItems, history, dispatch }) => {
+const CartDropdown = ({ cartItems, dispatch }) => {
+  const navigate = useNavigate();
+
   return (
     <div className="cart-dropdown">
 
@@ -25,7 +28,7 @@ const CartDropdown = ({ cartItems, history, dispatch }) => {
 
       <CustomButton
         onClick={() => {
-          history.push("/checkout");
+          navigate("/checkout");
           dispatch(toggleCartHidden());
         }}
       >
