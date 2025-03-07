@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
 import CartItem from "../cart-item/CartItem";
 import { selectCartItems } from "../../redux/cart/cart.selectors";
@@ -6,16 +7,26 @@ import { toggleCartHidden } from "../../redux/cart/cart.actions";
 import { createStructuredSelector } from "reselect";
 import { withRouter } from "../../helpers/with-router";
 import CustomButton from "../custom-button/CustomButton";
-
 import "./Cart-Dropdown.styles.scss";
-import { useNavigate } from "react-router-dom";
 
 const CartDropdown = ({ cartItems, dispatch }) => {
   const navigate = useNavigate();
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if(dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        dispatch(toggleCartHidden());
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [dispatch]);
 
   return (
-    <div className="cart-dropdown">
-
+    <div ref={dropdownRef} className="cart-dropdown">
       <div className="cart-items">
         {cartItems.length ? (
           cartItems.map((cartItem) => (
